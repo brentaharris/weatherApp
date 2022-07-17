@@ -3,6 +3,7 @@ import { Button, Container, Col, Row, Input, Form} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import baseUrl from "./baseUrl";
 import apiKey from "./apiKey";
+import './app.css';
 
 
 const App = () => {
@@ -34,23 +35,28 @@ const App = () => {
 
   return (
     <Container style={styles.container}>
-      { data && 
       <Row>
-        <Col>
-          <h1 style={styles.heading}>Today's weather</h1>
-          {console.log(data)}
-          <h3>{data.location.name}, {data.location.region}</h3>
-          <p>Currently: It is {data.current["temp_f"]} and {data.current.condition.text}</p>
-          <p>Feels like: {data.current['feelslike_f']}</p>
-          <p>Wind: {data.current['wind_dir']} at {data.current["wind_mph"]}</p>
-          <p>Last updated: {data.current['last_updated']}</p>
-        </Col>
-      </Row>}
+        <h3 style={styles.heading}>Today's Weather</h3>
+      </Row>
+      { data && 
+        <Row>
+          <Col sm='6'>
+            {console.log(data)}
+            <h3>{data.location.name}, {data.location.region}</h3>
+            <p>Currently: It is {data.current["temp_f"]} and {data.current.condition.text}</p>
+            <p>Feels like: {data.current['feelslike_f']}</p>
+            <p>Wind: {data.current['wind_dir']} at {data.current["wind_mph"]}</p>
+            <p>Last updated: {data.current['last_updated']}</p>
+          </Col>
+          <Col sm='6' className={ data.current.condition.text.toLowerCase() === 'sunny' ? 'sunny' : 'cloudy'}>
+          </Col>
+        </Row>}
       <Row>
         <Col>
             <Form onSubmit={handleSubmit}>
               <Input
                 required
+                style={styles.input}
                 placeholder='Enter zipcode...'
                 value={zipcode}
                 onChange={(e) => setZipcode(e.target.value)}
@@ -69,28 +75,19 @@ export default App;
 const styles = {
   container: {
       border: '2px solid black',
-      padding: '1rem',
-      margin: '3rem'
+      borderRadius: '10px',
+      margin: '3rem',
+      overflow: 'hidden',
+      backgroundImage: 'url("../sunny.jpg")'
   },
   heading: {
-      color: 'red',
-      textAlign: 'center'
+      color: '#2d3436',
+      backgroundColor: '#b2bec3',
+      textAlign: 'left',
+      paddingTop: '5px',
+      paddingBottom: '5px'
+  },
+  input: {
+    width: '50%'
   }
 }
-
-
-// return (
-//   <Container>
-//     {campsite && <SubHeader current={campsite.name} detail={true} />}
-//     <Row>{content}</Row>
-//   </Container>
-// );
-
-// const finalData = {
-//   currTemp: data.current["temp_f"],
-//   currDescriptionText: data.current.condition.text,
-//   feelsLike: data.current['feelslike_f'],
-//   windDir: data.current['wind_dir'],
-//   windSpeed: data.current["wind_mph"],
-//   lastUpdated: data.current['last_updated']
-// }

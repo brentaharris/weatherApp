@@ -1,0 +1,20 @@
+
+.sunny {
+    background-image: url('/src/sunny.jpg');
+}
+
+.cloudy {
+    background-image: url('/src/cloudy.jpg')
+}
+
+.raining {
+    background-color: url('/src/rain.jpg')
+}
+
+.default {
+    background-color: 'black';
+}
+
+/* .backgroundColor {
+    background-color: aqua;
+} */
