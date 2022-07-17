@@ -3,6 +3,8 @@ import { Row, Col, Container } from 'reactstrap';
 const DisplayWeather = () => {
 
 
+
+
     return(
         <Container style={styles.container}>
             {true && 
