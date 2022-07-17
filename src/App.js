@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import DisplayWeather from './DisplayWeather';
+import { useState } from 'react';
+import { Button, Container, Col, Row, Input } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
+
+  const [zipcode, setZipcode] = useState(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <DisplayWeather />
+      <Row>
+        <Col xs='4' md='2'>
+          <form onSubmit={handleSubmit}>
+            <Input
+              required
+              placeholder='Enter zipcode...'
+              value={zipcode}
+              onChange={(e) => setZipcode(e.target.value)}
+            />
+            <Button  type='submit' color='primary'>Get&nbsp;Weather</Button>
+          </form>
+          
+        </Col>
+      </Row>
+    </Container>
+    
   );
 }
 
