@@ -4,13 +4,11 @@ import { Button, Container, Col, Row, Input, Form} from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-function App() {
+const App = () => {
 
-  const [zipcode, setZipcode] = useState(null);
+  const [zipcode, setZipcode] = useState();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
+  const handleSubmit = () => {
 
   }
 
