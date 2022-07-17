@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Button, Container, Col, Row, FormControl, Form} from 'react-bootstrap';
+import { Button, Container, Col, Row, FormControl, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import baseUrl from "./data/baseUrl";
 import apiKey from "./data/apiKey";
-import './app.css';
 import WeatherCard from './components/WeatherCard';
 
 
@@ -46,21 +45,22 @@ const App = () => {
             <WeatherCard data={data}/>
           </Col>
         </Row>}
-
-      <Row>
-        <Col>
-            <Form onSubmit={handleSubmit}>
-              <FormControl
-                required
-                type='text'
-                style={styles.input}
-                placeholder='Enter zipcode...'
-                value={zipcode}
-                onChange={(e) => setZipcode(e.target.value)}
-              />
+      <Row style={styles.row}>
+        <Form onSubmit={handleSubmit}>
+          <Col>
+            <FormControl
+              required
+              type='text'
+              style={styles.input}
+              placeholder='Enter zipcode...'
+              value={zipcode}
+              onChange={(e) => setZipcode(e.target.value)}
+            />
+          </Col>
+          <Col>
               <Button  type='submit' color='primary'>Get&nbsp;Weather</Button>
-            </Form>
-        </Col>
+          </Col>
+        </Form>
       </Row>
     </Container>
   );
@@ -85,5 +85,8 @@ const styles = {
   },
   input: {
     width: '50%'
+  },
+  row: {
+    marginBottom: '10px'
   }
 }
