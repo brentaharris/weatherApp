@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Button, Container, Col, Row, Input, Form} from 'reactstrap';
+import { Button, Container, Col, Row, FormControl, Form} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import baseUrl from "./baseUrl";
-import apiKey from "./apiKey";
+import baseUrl from "./data/baseUrl";
+import apiKey from "./data/apiKey";
 import './app.css';
+import WeatherCard from './components/WeatherCard';
 
 
 const App = () => {
@@ -20,7 +21,7 @@ const App = () => {
         setData(results);
         return data;
       } catch (error) {
-        
+        console.log(error)
       }
     }
     if(query){
@@ -36,26 +37,22 @@ const App = () => {
   return (
     <Container style={styles.container}>
       <Row>
-        <h3 style={styles.heading}>Today's Weather</h3>
+          <h3 style={styles.heading}>Today's Weather</h3>
       </Row>
+      
       { data && 
         <Row>
           <Col sm='6'>
-            {console.log(data)}
-            <h3>{data.location.name}, {data.location.region}</h3>
-            <p>Currently: It is {data.current["temp_f"]} and {data.current.condition.text}</p>
-            <p>Feels like: {data.current['feelslike_f']}</p>
-            <p>Wind: {data.current['wind_dir']} at {data.current["wind_mph"]}</p>
-            <p>Last updated: {data.current['last_updated']}</p>
-          </Col>
-          <Col sm='6' className={ data.current.condition.text.toLowerCase() === 'sunny' ? 'sunny' : 'cloudy'}>
+            <WeatherCard data={data}/>
           </Col>
         </Row>}
+
       <Row>
         <Col>
             <Form onSubmit={handleSubmit}>
-              <Input
+              <FormControl
                 required
+                type='text'
                 style={styles.input}
                 placeholder='Enter zipcode...'
                 value={zipcode}
@@ -78,7 +75,6 @@ const styles = {
       borderRadius: '10px',
       margin: '3rem',
       overflow: 'hidden',
-      backgroundImage: 'url("../sunny.jpg")'
   },
   heading: {
       color: '#2d3436',
