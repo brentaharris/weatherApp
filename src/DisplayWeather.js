@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { Row, Col } from 'reactstrap';
 import baseUrl from './baseUrl';
 import apiKey from './apiKey';
 import axios from 'axios';
@@ -27,8 +28,14 @@ const DisplayWeather = () => {
         const lastUpdated = data.current['last_updated'];
 
         return (
-            <div>
-                <h1>Today's weather</h1>
+            <div style={styles.container}>
+                <Row>
+                    <Col xs='12'>
+                        <h1 style={styles.heading}>Today's weather</h1>
+                    </Col>
+                    
+                </Row>
+                
                 <h3>{location}</h3>
                 <p>It is currently: {currDescriptionText} and {currTemp}F</p>
                 <p>It feels like: {feelsLike}</p>
@@ -43,3 +50,16 @@ const DisplayWeather = () => {
 }
 
 export default DisplayWeather;
+
+
+const styles = {
+    container: {
+        border: '2px solid black',
+        padding: '1rem',
+        margin: '3rem'
+    },
+    heading: {
+        color: 'red',
+        textAlign: 'center'
+    }
+}
