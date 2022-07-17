@@ -34,35 +34,39 @@ const App = () => {
   }
 
   return (
-    <Container style={styles.container}>
-      <Row>
-          <h3 style={styles.heading}>Today's Weather</h3>
-      </Row>
-      
-      { data && 
+    <>
+      <Container style={{ marginTop: '1rem' }}>
+          <Form onSubmit={handleSubmit}>
+            <Row style={styles.row}>
+              <Col sm='3'>
+                <FormControl
+                  required
+                  type='text'
+                  style={styles.input}
+                  placeholder='Enter zipcode...'
+                  value={zipcode}
+                  onChange={(e) => setZipcode(e.target.value)}
+                />
+              </Col>
+              <Col>
+                <Button type='submit' color='primary'>Get&nbsp;Weather</Button>
+              </Col>
+            </Row>
+          </Form>
+      </Container>
+      <Container style={styles.container}>
         <Row>
-          <Col sm='6'>
-            <WeatherCard data={data}/>
-          </Col>
-        </Row>}
-      <Row style={styles.row}>
-        <Form onSubmit={handleSubmit}>
-          <Col>
-            <FormControl
-              required
-              type='text'
-              style={styles.input}
-              placeholder='Enter zipcode...'
-              value={zipcode}
-              onChange={(e) => setZipcode(e.target.value)}
-            />
-          </Col>
-          <Col>
-              <Button  type='submit' color='primary'>Get&nbsp;Weather</Button>
-          </Col>
-        </Form>
-      </Row>
-    </Container>
+          <h3 style={styles.heading}>Today's Weather</h3>
+        </Row>
+
+        { data && 
+          <Row>
+            <Col sm='6'>
+              <WeatherCard data={data}/>
+            </Col>
+          </Row>}
+      </Container>
+    </>
   );
 }
 
@@ -73,8 +77,8 @@ const styles = {
   container: {
       border: '2px solid black',
       borderRadius: '10px',
-      margin: '3rem',
       overflow: 'hidden',
+      marginTop: '1rem'
   },
   heading: {
       color: '#2d3436',
@@ -84,7 +88,7 @@ const styles = {
       paddingBottom: '5px'
   },
   input: {
-    width: '50%'
+    width: '100%'
   },
   row: {
     marginBottom: '10px'

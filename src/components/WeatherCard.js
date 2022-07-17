@@ -5,7 +5,7 @@ const WeatherCard = ({ data }) => {
 //   console.log(data)
 
   return(
-    <Card>
+    <Card style={styles.card}>
         <Card.Title style={styles.heading}>
             {location.region}
         </Card.Title>
@@ -25,6 +25,10 @@ const WeatherCard = ({ data }) => {
 export default WeatherCard;
 
 const styles = {
+  card: {
+    marginBottom: '10px',
+    borderRadius: '10px'
+  },
     heading: {
         textAlign: 'center'
     }
