@@ -2,7 +2,7 @@ import { Card, Container, Row, Col } from "react-bootstrap";
 
 const WeatherCard = ({ data }) => {
   const { current, location } = data;
-  console.log(data);
+  // console.log(data);
 
   return (
     <Container>
@@ -22,9 +22,15 @@ const WeatherCard = ({ data }) => {
         </Col>
         <Col>
           <Card style={styles.card}>
-            <Card.Text style={styles.cardTextLg}>
-              {current.condition.text}
-            </Card.Text>
+            {current.condition.text.length > 13 ? (
+              <Card.Text style={styles.conditionalText}>
+                {current.condition.text}
+              </Card.Text>
+            ) : (
+              <Card.Text style={styles.cardTextLg}>
+                {current.condition.text}
+              </Card.Text>
+            )}
             <Card.Text style={styles.cardText}>Condition</Card.Text>
           </Card>
         </Col>
@@ -83,10 +89,17 @@ const styles = {
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
+    lineHeight: "1.2",
   },
   cardTextSm: {
     fontSize: 20,
     color: "white",
     textAlign: "center",
+  },
+  conditionalText: {
+    fontSize: 30,
+    color: "white",
+    textAlign: "center",
+    lineHeight: "1.2",
   },
 };

@@ -11,6 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import baseUrl from "./data/baseUrl";
 import apiKey from "./data/apiKey";
 import WeatherCard from "./components/WeatherCard";
+import Alerts from "./components/Alerts";
 
 const App = () => {
   const [zipcode, setZipcode] = useState("");
@@ -20,7 +21,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const requestUrl = `${baseUrl}/current.json?key=${apiKey}&q=${zipcode}`;
+        const requestUrl = `${baseUrl}/current.json?key=${apiKey}&q=${zipcode}&alerts=yes`;
         const response = await fetch(requestUrl);
         const results = await response.json();
         setData(results);
@@ -75,6 +76,7 @@ const App = () => {
           </Row>
         )}
       </Container>
+      <Alerts />
     </>
   );
 };
