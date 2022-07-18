@@ -1,96 +1,105 @@
-import { useState, useEffect } from 'react';
-import { Button, Container, Col, Row, FormControl, Form } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState, useEffect } from "react";
+import {
+  Button,
+  Container,
+  Col,
+  Row,
+  FormControl,
+  Form,
+} from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 import baseUrl from "./data/baseUrl";
 import apiKey from "./data/apiKey";
-import WeatherCard from './components/WeatherCard';
-
+import WeatherCard from "./components/WeatherCard";
 
 const App = () => {
-  const [zipcode, setZipcode] = useState('');
-  const [query, setQuery] = useState('')
-  const [data, setData] = useState('');
+  const [zipcode, setZipcode] = useState("");
+  const [query, setQuery] = useState("");
+  const [data, setData] = useState("");
 
-  useEffect( () => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
-        const requestUrl = `${baseUrl}/current.json?key=${apiKey}&q=${zipcode}`
-        const response = await fetch(requestUrl)
-        const results = await response.json()
+        const requestUrl = `${baseUrl}/current.json?key=${apiKey}&q=${zipcode}`;
+        const response = await fetch(requestUrl);
+        const results = await response.json();
         setData(results);
         return data;
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
-    if(query){
+    };
+    if (query) {
       fetchData();
     }
-  }, [query])
+  }, [query]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setQuery(zipcode);
-  }
+  };
 
   return (
     <>
-      <Container style={{ marginTop: '1rem' }}>
-          <Form onSubmit={handleSubmit}>
-            <Row style={styles.row}>
-              <Col sm='3'>
-                <FormControl
-                  required
-                  type='text'
-                  style={styles.input}
-                  placeholder='Enter zipcode...'
-                  value={zipcode}
-                  onChange={(e) => setZipcode(e.target.value)}
-                />
-              </Col>
-              <Col>
-                <Button type='submit' color='primary'>Get&nbsp;Weather</Button>
-              </Col>
-            </Row>
-          </Form>
+      <Container style={{ marginTop: "1rem" }}>
+        <Form onSubmit={handleSubmit}>
+          <Row style={styles.row}>
+            <Col sm="3">
+              <FormControl
+                required
+                type="text"
+                style={styles.input}
+                placeholder="Enter zipcode..."
+                value={zipcode}
+                onChange={(e) => setZipcode(e.target.value)}
+              />
+            </Col>
+            <Col>
+              <Button type="submit" color="primary">
+                Get&nbsp;Weather
+              </Button>
+            </Col>
+          </Row>
+        </Form>
       </Container>
       <Container style={styles.container}>
         <Row>
-          <h3 style={styles.heading}>Today's Weather</h3>
+          <h3 style={styles.heading}>Current Forcast</h3>
         </Row>
 
-        { data && 
+        {data && (
           <Row>
-            <Col sm='6'>
-              <WeatherCard data={data}/>
+            <Col>
+              <WeatherCard data={data} />
             </Col>
-          </Row>}
+          </Row>
+        )}
       </Container>
     </>
   );
-}
+};
 
 export default App;
 
-
 const styles = {
   container: {
-      border: '2px solid black',
-      borderRadius: '10px',
-      overflow: 'hidden',
-      marginTop: '1rem'
+    border: "2px solid gray",
+    borderRadius: "10px",
+    overflow: "hidden",
+    marginTop: "1rem",
+    background: `linear-gradient(to right, #0984e3, #53a9eb)`,
   },
   heading: {
-      color: '#2d3436',
-      backgroundColor: '#b2bec3',
-      textAlign: 'left',
-      paddingTop: '5px',
-      paddingBottom: '5px'
+    color: "white",
+    backgroundColor: "blue",
+    textAlign: "center",
+    paddingTop: "5px",
+    paddingBottom: "5px",
   },
   input: {
-    width: '100%'
+    width: "100%",
   },
   row: {
-    marginBottom: '10px'
-  }
-}
+    marginBottom: "10px",
+  },
+};
