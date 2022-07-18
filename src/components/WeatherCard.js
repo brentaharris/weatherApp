@@ -31,7 +31,6 @@ const WeatherCard = ({ data }) => {
                 {current.condition.text}
               </Card.Text>
             )}
-            <Card.Text style={styles.cardText}>Condition</Card.Text>
           </Card>
         </Col>
         <Col sm="3">

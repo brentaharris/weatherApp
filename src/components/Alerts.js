@@ -1,10 +1,14 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-const Alerts = () => {
+const Alerts = ({ alerts }) => {
   return (
     <Container>
       <Row>
-        <Col>Alerts go here.</Col>
+        {alerts?.length ? (
+          <Col>ACTIVE WEATHER ALERTS</Col>
+        ) : (
+          <Col>No active weather alerts in this area.</Col>
+        )}
       </Row>
     </Container>
   );

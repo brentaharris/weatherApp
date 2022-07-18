@@ -21,7 +21,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const requestUrl = `${baseUrl}/current.json?key=${apiKey}&q=${zipcode}&alerts=yes`;
+        const requestUrl = `${baseUrl}/forecast.json?key=${apiKey}&q=${zipcode}&alerts=yes`;
         const response = await fetch(requestUrl);
         const results = await response.json();
         setData(results);
@@ -65,7 +65,7 @@ const App = () => {
       </Container>
       <Container style={styles.container}>
         <Row>
-          <h3 style={styles.heading}>Current Forcast</h3>
+          <h3 style={styles.heading}>Current Forecast</h3>
         </Row>
 
         {data && (
@@ -76,7 +76,7 @@ const App = () => {
           </Row>
         )}
       </Container>
-      <Alerts />
+      <Alerts data={data} />
     </>
   );
 };
