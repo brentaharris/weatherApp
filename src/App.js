@@ -12,7 +12,7 @@ import baseUrl from "./data/baseUrl";
 import apiKey from "./data/apiKey";
 import WeatherCard from "./components/WeatherCard";
 import Alerts from "./components/Alerts";
-import TwoDayForecast from "./components/TwoDayForecast";
+// import TwoDayForecast from "./components/TwoDayForecast";
 
 const App = () => {
   const [zipcode, setZipcode] = useState("");
@@ -78,9 +78,7 @@ const App = () => {
         )}
       </Container>
       <Alerts data={data} />
-      <Container>
-        <TwoDayForecast data={data} />
-      </Container>
+      <Container>{/* <TwoDayForecast data={data} /> */}</Container>
     </>
   );
 };
