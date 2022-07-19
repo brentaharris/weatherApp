@@ -1,9 +1,16 @@
 import { Card, Container, Row, Col } from "react-bootstrap";
+// import { FiSun } from 'react-icons/fi';
+// import { WiCloudy } from 'react-icons/wi';
+// import { BsCloudRain } from 'react-icons/bs'
+// import { RiSunCloudyLine } from 'react-icons/ri';
+// import selectWeatherIcon from '../components/selectWeatherIcon';
+
 
 const WeatherCard = ({ data }) => {
   const { current, forecast, location } = data;
-  console.log(data);
+  // console.log(data);
 
+  
   return (
     <Container>
       <Row style={styles.relative}>
