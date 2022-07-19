@@ -1,6 +1,8 @@
 import { Container, Row, Col } from "react-bootstrap";
 
-const Alerts = ({ alerts }) => {
+const Alerts = ({ data }) => {
+  const { alerts, location } = data;
+
   return (
     <Container>
       <Row>

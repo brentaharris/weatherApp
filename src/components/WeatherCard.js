@@ -1,21 +1,22 @@
 import { Card, Container, Row, Col } from "react-bootstrap";
 
 const WeatherCard = ({ data }) => {
-  const { current, location } = data;
-  // console.log(data);
+  const { alerts, current, forecast, location } = data;
+  console.log(data);
 
   return (
     <Container>
-      <Row>
+      <Row style={styles.relative}>
         <Card.Text style={styles.cardText}>
           {location.name}, {location.region}
         </Card.Text>
+        <Card.Text style={styles.absolute}> {Math.round(forecast.forecastday[0].day['maxtemp_f'])}&#176; / {Math.round(forecast.forecastday[0].day['mintemp_f'])}&#176;</Card.Text>
       </Row>
       <Row>
         <Col sm="3">
           <Card style={styles.card}>
             <Card.Text style={styles.cardTextLg}>
-              {current["temp_f"]}&#176;F
+              {Math.round(current["temp_f"])}&#176;F
             </Card.Text>
             <Card.Text style={styles.cardText}>Currently</Card.Text>
           </Card>
@@ -36,7 +37,7 @@ const WeatherCard = ({ data }) => {
         <Col sm="3">
           <Card style={styles.card}>
             <Card.Text style={styles.cardTextLg}>
-              {current["feelslike_f"]}&#176;F
+              {Math.round(current["feelslike_f"])}&#176;F
             </Card.Text>
             <Card.Text style={styles.cardText}>Feels Like</Card.Text>
           </Card>
@@ -44,7 +45,7 @@ const WeatherCard = ({ data }) => {
         <Col sm="3">
           <Card style={styles.card}>
             <Card.Text style={styles.cardTextLg}>
-              {current["wind_mph"]} mph
+              {Math.round(current["wind_mph"])} mph
             </Card.Text>
             <Card.Text style={styles.cardText}>Wind Speed</Card.Text>
           </Card>
@@ -63,6 +64,13 @@ const WeatherCard = ({ data }) => {
 export default WeatherCard;
 
 const styles = {
+  absolute: {
+    position: 'absolute',
+    top: 5,
+    left: 0,
+    color: 'white',
+    fontSize: 24
+  },
   card: {
     height: 200,
     display: "flex",
@@ -81,7 +89,7 @@ const styles = {
   cardText: {
     textAlign: "center",
     fontSize: 30,
-    color: "white",
+    color: "white"
   },
   cardTextLg: {
     fontSize: 45,
@@ -101,4 +109,7 @@ const styles = {
     textAlign: "center",
     lineHeight: "1.2",
   },
+  relative: {
+    position: 'relative'
+  }
 };
