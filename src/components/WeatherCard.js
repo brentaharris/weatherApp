@@ -1,7 +1,7 @@
 import { Card, Container, Row, Col } from "react-bootstrap";
 
 const WeatherCard = ({ data }) => {
-  const { alerts, current, forecast, location } = data;
+  const { current, forecast, location } = data;
   console.log(data);
 
   return (
@@ -10,7 +10,11 @@ const WeatherCard = ({ data }) => {
         <Card.Text style={styles.cardText}>
           {location.name}, {location.region}
         </Card.Text>
-        <Card.Text style={styles.absolute}> {Math.round(forecast.forecastday[0].day['maxtemp_f'])}&#176; / {Math.round(forecast.forecastday[0].day['mintemp_f'])}&#176;</Card.Text>
+        <Card.Text style={styles.absolute}>
+          {" "}
+          {Math.round(forecast.forecastday[0].day["maxtemp_f"])}&#176; /{" "}
+          {Math.round(forecast.forecastday[0].day["mintemp_f"])}&#176;
+        </Card.Text>
       </Row>
       <Row>
         <Col sm="3">
@@ -65,11 +69,11 @@ export default WeatherCard;
 
 const styles = {
   absolute: {
-    position: 'absolute',
+    position: "absolute",
     top: 5,
     left: 0,
-    color: 'white',
-    fontSize: 24
+    color: "white",
+    fontSize: 24,
   },
   card: {
     height: 200,
@@ -89,7 +93,7 @@ const styles = {
   cardText: {
     textAlign: "center",
     fontSize: 30,
-    color: "white"
+    color: "white",
   },
   cardTextLg: {
     fontSize: 45,
@@ -110,6 +114,6 @@ const styles = {
     lineHeight: "1.2",
   },
   relative: {
-    position: 'relative'
-  }
+    position: "relative",
+  },
 };

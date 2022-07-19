@@ -12,6 +12,7 @@ import baseUrl from "./data/baseUrl";
 import apiKey from "./data/apiKey";
 import WeatherCard from "./components/WeatherCard";
 import Alerts from "./components/Alerts";
+import TwoDayForecast from "./components/TwoDayForecast";
 
 const App = () => {
   const [zipcode, setZipcode] = useState("");
@@ -21,7 +22,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const requestUrl = `${baseUrl}/forecast.json?key=${apiKey}&q=${zipcode}&alerts=yes`;
+        const requestUrl = `${baseUrl}/forecast.json?key=${apiKey}&q=${zipcode}&alerts=yes&days=5`;
         const response = await fetch(requestUrl);
         const results = await response.json();
         setData(results);
@@ -77,6 +78,9 @@ const App = () => {
         )}
       </Container>
       <Alerts data={data} />
+      <Container>
+        <TwoDayForecast data={data} />
+      </Container>
     </>
   );
 };

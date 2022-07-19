@@ -3,6 +3,9 @@ import { Container, Row, Col } from "react-bootstrap";
 const Alerts = ({ data }) => {
   const { alerts, location } = data;
 
+  //  TODO
+  // add accordian style drop down to display alerts (defaulted open when alert is active)
+
   return (
     <Container>
       <Row>
