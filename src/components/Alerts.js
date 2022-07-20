@@ -4,6 +4,7 @@ const Alerts = ({ data }) => {
   const { alerts, location } = data;
 
   //  TODO
+  // implement redux store
   // add accordian style drop down to display alerts (defaulted open when alert is active)
 
   return (
