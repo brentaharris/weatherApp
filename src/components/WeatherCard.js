@@ -3,7 +3,7 @@ import { Card, Container, Row, Col } from "react-bootstrap";
 
 const WeatherCard = ({ data }) => {
   const { current, forecast, location } = data;
-  console.log(data);
+  // console.log(data);
 
   return (
     <Container>

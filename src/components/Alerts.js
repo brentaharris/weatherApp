@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 
 const Alerts = ({ data }) => {
-  const { alerts, location } = data;
+  const { alerts } = data;
 
   //  TODO
   // implement redux store

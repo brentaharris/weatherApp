@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchWeather } from "./components/weatherSlice";
 import {
   Button,
   Container,
@@ -8,32 +10,45 @@ import {
   Form,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import baseUrl from "./data/baseUrl";
-import apiKey from "./data/apiKey";
+import { baseUrl } from "./data/baseUrl";
+import { apiKey } from "./data/apiKey";
 import WeatherCard from "./components/WeatherCard";
 import Alerts from "./components/Alerts";
+
+
 
 const App = () => {
   const [zipcode, setZipcode] = useState("");
   const [query, setQuery] = useState("");
   const [data, setData] = useState("");
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const requestUrl = `${baseUrl}/forecast.json?key=${apiKey}&q=${zipcode}&alerts=yes&days=5`;
-        const response = await fetch(requestUrl);
-        const results = await response.json();
-        setData(results);
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    if (query) {
-      fetchData();
-    }
-  }, [query]);
+    dispatch(fetchWeather())
+  }, [dispatch])
+
+
+  // const requestUrl = `${baseUrl}/forecast.json?key=${apiKey}&q=${zipcode}&alerts=yes&days=3`;
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(requestUrl);
+  //       if (!response.ok){
+  //         return Promise.reject('Unable to fetch, status: ' + response.status)
+  //       }
+  //       const results = await response.json();
+  //       setData(results);
+  //       return data;
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   if (query) {
+  //     fetchData();
+  //   }
+  // }, [query]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
