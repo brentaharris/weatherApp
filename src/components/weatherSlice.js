@@ -22,6 +22,8 @@ const initialState = {
   tempLow: 0,
   currCondition: '',
   windSpeed: 0,
+  humidity: 0,
+  visibilityRange: 0,
   isLoading: true,
   errMsg: ''
 };
@@ -37,7 +39,16 @@ const weatherSlice = createSlice({
     [fetchWeather.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.errMsg = ''
-      state.city = 'JumboDumbo'
+      state.city = action.payload.location.name
+      state.state = action.payload.location.region
+      state.currTemp = action.payload.current["temp_f"]
+      state.tempHi = action.payload.forecast.forecastday[0].day['maxtemp_f']
+      state.tempLow = action.payload.forecast.forecastday[0].day['mintemp_f']
+      state.currCondition = action.payload.current.condition.text
+      state.windSpeed = action.payload.current['wind_mph']
+      state.humidity = action.payload.current.humidity
+      state.visibilityRange = action.payload.current['vis_miles']
+      
     },
     [fetchWeather.rejected]: (state, action) => {
       state.isLoading = false;

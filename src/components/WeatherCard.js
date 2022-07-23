@@ -1,41 +1,51 @@
 import { Card, Container, Row, Col } from "react-bootstrap";
-// import Testing from "./Testing";
+import { useSelector } from "react-redux/es/exports";
 
-const WeatherCard = ({ data }) => {
-  const { current, forecast, location } = data;
-  // console.log(data);
+
+const WeatherCard = () => {
+
+  const city = useSelector((state) => state.weather.city)
+  const state = useSelector((state) => state.weather.state)
+  const currTemp = useSelector((state) => state.weather.currTemp)
+  const tempHi = useSelector((state) => state.weather.tempHi)
+  const tempLow = useSelector((state) => state.weather.tempLow)
+  const currCondition = useSelector((state) => state.weather.currCondition)
+  const windSpeed = useSelector((state) => state.weather.windSpeed)
+  const humidity = useSelector((state) => state.weather.humidity)
+  const visibilityRange = useSelector((state) => state.weather.visibilityRange)
+  const isLoading = useSelector((state) => state.weather.isLoading)
+  const errMsg = useSelector((state) => state.weather.errMsg)
 
   return (
     <Container>
-      {/* <Testing /> */}
       <Row style={styles.relative}>
         <Card.Text style={styles.cardText}>
-          {location.name}, {location.region}
+          {city}, {state}
         </Card.Text>
         <Card.Text style={styles.absolute}>
           {" "}
-          {Math.round(forecast.forecastday[0].day["maxtemp_f"])}&#176; /{" "}
-          {Math.round(forecast.forecastday[0].day["mintemp_f"])}&#176;
+          {Math.round(tempHi)}&#176; /{" "}
+          {Math.round(tempLow)}&#176;
         </Card.Text>
       </Row>
       <Row>
         <Col sm="3">
           <Card style={styles.card}>
             <Card.Text style={styles.cardTextLg}>
-              {Math.round(current["temp_f"])}&#176;F
+              {Math.round(currTemp)}&#176;F
             </Card.Text>
             <Card.Text style={styles.cardText}>Currently</Card.Text>
           </Card>
         </Col>
         <Col>
           <Card style={styles.card}>
-            {current.condition.text.length > 13 ? (
+            {currCondition.length > 13 ? (
               <Card.Text style={styles.conditionalText}>
-                {current.condition.text}
+                {currCondition}
               </Card.Text>
             ) : (
               <Card.Text style={styles.cardTextLg}>
-                {current.condition.text}
+                {currCondition}
               </Card.Text>
             )}
           </Card>
@@ -43,7 +53,7 @@ const WeatherCard = ({ data }) => {
         <Col sm="3">
           <Card style={styles.card}>
             <Card.Text style={styles.cardTextLg}>
-              {Math.round(current["feelslike_f"])}&#176;F
+              {Math.round(currTemp)}&#176;F
             </Card.Text>
             <Card.Text style={styles.cardText}>Feels Like</Card.Text>
           </Card>
@@ -51,7 +61,7 @@ const WeatherCard = ({ data }) => {
         <Col sm="3">
           <Card style={styles.card}>
             <Card.Text style={styles.cardTextLg}>
-              {Math.round(current["wind_mph"])} mph
+              {Math.round(windSpeed)} mph
             </Card.Text>
             <Card.Text style={styles.cardText}>Wind Speed</Card.Text>
           </Card>
@@ -59,7 +69,7 @@ const WeatherCard = ({ data }) => {
       </Row>
       <Row>
         <Card.Text style={styles.cardTextSm}>
-          Humidity: {current.humidity}% -- Visibility: {current["vis_miles"]}{" "}
+          Humidity: {humidity}% -- Visibility: {visibilityRange}{" "}
           miles
         </Card.Text>
       </Row>
@@ -108,6 +118,7 @@ const styles = {
     fontSize: 20,
     color: "white",
     textAlign: "center",
+    marginBottom: 2
   },
   conditionalText: {
     fontSize: 30,

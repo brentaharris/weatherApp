@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchWeather } from "./components/weatherSlice";
 import {
   Button,
@@ -14,48 +14,29 @@ import { baseUrl } from "./data/baseUrl";
 import { apiKey } from "./data/apiKey";
 import WeatherCard from "./components/WeatherCard";
 import Alerts from "./components/Alerts";
+import Testing from "./components/Testing";
 
 
 
 const App = () => {
   const [zipcode, setZipcode] = useState("");
   const [query, setQuery] = useState("");
-  const [data, setData] = useState("");
-
   const dispatch = useDispatch();
+
+   // const requestUrl = `${baseUrl}/forecast.json?key=${apiKey}&q=${zipcode}&alerts=yes&days=3`;
 
   useEffect(() => {
     dispatch(fetchWeather())
   }, [dispatch])
 
-
-  // const requestUrl = `${baseUrl}/forecast.json?key=${apiKey}&q=${zipcode}&alerts=yes&days=3`;
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(requestUrl);
-  //       if (!response.ok){
-  //         return Promise.reject('Unable to fetch, status: ' + response.status)
-  //       }
-  //       const results = await response.json();
-  //       setData(results);
-  //       return data;
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   if (query) {
-  //     fetchData();
-  //   }
-  // }, [query]);
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setQuery(zipcode);
   };
 
-  
+
 
   return (
     <>
@@ -85,16 +66,15 @@ const App = () => {
           <h3 style={styles.heading}>Current Forecast</h3>
         </Row>
 
-        {data && (
+        {true && (
           <Row>
             <Col>
-              <WeatherCard data={data} />
+              <WeatherCard />
             </Col>
           </Row>
         )}
       </Container>
-      <Alerts data={data} />
-      <Container>{/* <TwoDayForecast data={data} /> */}</Container>
+      {/* <Alerts data={data} /> */}
     </>
   );
 };

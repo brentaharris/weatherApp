@@ -1,13 +1,14 @@
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-// const Testing = () => {
-//   const currTemp = useSelector((state) => state.weather.currTemp);
+const Testing = () => {
+  const city = useSelector((state) => state.weather.city);
+  const state = useSelector((state) => state.weather.state);
 
-//   return (
-//     <div>
-//       <p>The current temperature is {currTemp} F</p>
-//     </div>
-//   );
-// };
+  return (
+    <div>
+      <p>The current temperature is {city}, {state}F</p>
+    </div>
+  );
+};
 
-// export default Testing;
+export default Testing;
