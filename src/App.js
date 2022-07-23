@@ -13,6 +13,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import WeatherCard from "./components/WeatherCard";
 import { Loading } from './components/Loading';
 import { Error } from './components/Error';
+import './App.css'
 
 //TODO:
 //two day forecast
@@ -54,7 +55,7 @@ const App = () => {
   }
 
   return (
-    <>
+    <main>
       <Container style={{ marginTop: "1rem" }}>
         <Form onSubmit={handleSubmit}>
           <Row style={styles.row}>
@@ -79,15 +80,15 @@ const App = () => {
       <Container style={styles.container}>
         {content}
       </Container>
-    </>
+    </main>
   );
 };
 
 export default App;
 
 const styles = {
-  container: {
-    border: "2px solid gray",
+    container: {
+    border: "2px solid black",
     borderRadius: "10px",
     overflow: "hidden",
     marginTop: "1rem",
