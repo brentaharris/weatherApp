@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWeather } from "./components/weatherSlice";
 import {
@@ -10,33 +10,40 @@ import {
   Form,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { baseUrl } from "./data/baseUrl";
-import { apiKey } from "./data/apiKey";
 import WeatherCard from "./components/WeatherCard";
-import Alerts from "./components/Alerts";
-import Testing from "./components/Testing";
+// import { Loading } from './components/Loading';
+import { Error } from './components/Error';
 
-
+//TODO:
+//two day forecast
+//work-in loading 
+//display pic and/or icons for weather conditions
+//alerts
+//refactor code
 
 const App = () => {
-  const [zipcode, setZipcode] = useState("");
-  const [query, setQuery] = useState("");
+  const [zipcode, setZipcode] = useState('');
   const dispatch = useDispatch();
 
-   // const requestUrl = `${baseUrl}/forecast.json?key=${apiKey}&q=${zipcode}&alerts=yes&days=3`;
+  // const isLoading = useSelector((state) => state.weather.isLoading)
+  const errMsg = useSelector((state) => state.weather.errMsg)
 
-  useEffect(() => {
-    dispatch(fetchWeather())
-  }, [dispatch])
-
- 
-
-  const handleSubmit = (e) => {
+   const handleSubmit = (e) => {
     e.preventDefault();
-    setQuery(zipcode);
+    dispatch(fetchWeather(zipcode))
   };
 
+  // if (isLoading) {
+  //   return(
+  //     <Loading />
+  //   )
+  // }
 
+  if (errMsg) {
+    return(
+      <Error />
+    )
+  }
 
   return (
     <>
@@ -65,16 +72,12 @@ const App = () => {
         <Row>
           <h3 style={styles.heading}>Current Forecast</h3>
         </Row>
-
-        {true && (
           <Row>
             <Col>
               <WeatherCard />
             </Col>
           </Row>
-        )}
       </Container>
-      {/* <Alerts data={data} /> */}
     </>
   );
 };

@@ -3,7 +3,6 @@ import { useSelector } from "react-redux/es/exports";
 
 
 const WeatherCard = () => {
-
   const city = useSelector((state) => state.weather.city)
   const state = useSelector((state) => state.weather.state)
   const currTemp = useSelector((state) => state.weather.currTemp)
@@ -13,8 +12,8 @@ const WeatherCard = () => {
   const windSpeed = useSelector((state) => state.weather.windSpeed)
   const humidity = useSelector((state) => state.weather.humidity)
   const visibilityRange = useSelector((state) => state.weather.visibilityRange)
-  const isLoading = useSelector((state) => state.weather.isLoading)
-  const errMsg = useSelector((state) => state.weather.errMsg)
+  // const isLoading = useSelector((state) => state.weather.isLoading)
+  // const errMsg = useSelector((state) => state.weather.errMsg)
 
   return (
     <Container>

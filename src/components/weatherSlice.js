@@ -2,10 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { baseUrl } from "../data/baseUrl";
 import { apiKey } from "../data/apiKey";
 
+
 export const fetchWeather = createAsyncThunk(
   'weather/fetchWeather',
-  async () => {
-    const response = await fetch(baseUrl + apiKey + '&q=29681&days=3')
+  async (zipcode) => {
+    const response = await fetch(`${baseUrl}${apiKey}&q=${zipcode}&days=3`)
     if (!response.ok) {
       return Promise.reject('Unable to fetch, status: ' + response.status)
     }  
