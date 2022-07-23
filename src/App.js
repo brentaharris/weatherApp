@@ -11,12 +11,11 @@ import {
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import WeatherCard from "./components/WeatherCard";
-// import { Loading } from './components/Loading';
+import { Loading } from './components/Loading';
 import { Error } from './components/Error';
 
 //TODO:
 //two day forecast
-//work-in loading 
 //display pic and/or icons for weather conditions
 //alerts
 //refactor code
@@ -25,7 +24,7 @@ const App = () => {
   const [zipcode, setZipcode] = useState('');
   const dispatch = useDispatch();
 
-  // const isLoading = useSelector((state) => state.weather.isLoading)
+  const isLoading = useSelector((state) => state.weather.isLoading)
   const errMsg = useSelector((state) => state.weather.errMsg)
 
    const handleSubmit = (e) => {
@@ -33,16 +32,25 @@ const App = () => {
     dispatch(fetchWeather(zipcode))
   };
 
-  // if (isLoading) {
-  //   return(
-  //     <Loading />
-  //   )
-  // }
+  let content = null;
 
-  if (errMsg) {
-    return(
-      <Error />
-    )
+  if (isLoading) {
+    content = <Loading />;
+  } else if (errMsg) {
+    content = <Error errMsg={errMsg} />;
+  } else {
+    content = (
+      <>
+        <Row>
+          <h3 style={styles.heading}>Current Forecast</h3>
+        </Row>
+        <Row>
+          <Col>
+            <WeatherCard />
+          </Col>
+        </Row>
+      </>
+    );
   }
 
   return (
@@ -69,14 +77,7 @@ const App = () => {
         </Form>
       </Container>
       <Container style={styles.container}>
-        <Row>
-          <h3 style={styles.heading}>Current Forecast</h3>
-        </Row>
-          <Row>
-            <Col>
-              <WeatherCard />
-            </Col>
-          </Row>
+        {content}
       </Container>
     </>
   );

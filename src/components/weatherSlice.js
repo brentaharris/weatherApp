@@ -25,7 +25,7 @@ const initialState = {
   windSpeed: 0,
   humidity: 0,
   visibilityRange: 0,
-  isLoading: true,
+  isLoading: false,
   errMsg: ''
 };
 
