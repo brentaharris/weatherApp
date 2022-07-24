@@ -1,5 +1,6 @@
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux/es/exports";
+import partCloudyIcon from '../assets/weather/64x64/day/116.png'
 
 
 const WeatherCard = () => {
@@ -13,65 +14,67 @@ const WeatherCard = () => {
   const humidity = useSelector((state) => state.weather.humidity)
   const visibilityRange = useSelector((state) => state.weather.visibilityRange)
 
-  return (
-    <Container>
-      <Row style={styles.relative}>
-        <Card.Text style={styles.cardText}>
-          {city}, {state}
-        </Card.Text>
-        <Card.Text style={styles.absolute}>
-          {" "}
-          {Math.round(tempHi)}&#176; /{" "}
-          {Math.round(tempLow)}&#176;
-        </Card.Text>
-      </Row>
-      <Row>
-        <Col sm="3">
-          <Card style={styles.card}>
-            <Card.Text style={styles.cardTextLg}>
-              {Math.round(currTemp)}&#176;F
-            </Card.Text>
-            <Card.Text style={styles.cardText}>Currently</Card.Text>
-          </Card>
-        </Col>
-        <Col>
-          <Card style={styles.card}>
-            {currCondition.length > 13 ? (
-              <Card.Text style={styles.conditionalText}>
-                {currCondition}
-              </Card.Text>
-            ) : (
+  if (city) {
+    return (
+      <Container>
+        <Row style={styles.relative}>
+          <Card.Text style={styles.cardText}>
+            {city}, {state}
+          </Card.Text>
+          <Card.Text style={styles.absolute}>
+            {" "}
+            {Math.round(tempHi)}&#176; /{" "}
+            {Math.round(tempLow)}&#176;
+          </Card.Text>
+        </Row>
+        <Row>
+          <Col sm="3">
+            <Card style={styles.card}>
               <Card.Text style={styles.cardTextLg}>
-                {currCondition}
+                {Math.round(currTemp)}&#176;F
               </Card.Text>
-            )}
-          </Card>
-        </Col>
-        <Col sm="3">
-          <Card style={styles.card}>
-            <Card.Text style={styles.cardTextLg}>
-              {Math.round(currTemp)}&#176;F
-            </Card.Text>
-            <Card.Text style={styles.cardText}>Feels Like</Card.Text>
-          </Card>
-        </Col>
-        <Col sm="3">
-          <Card style={styles.card}>
-            <Card.Text style={styles.cardTextLg}>
-              {Math.round(windSpeed)} mph
-            </Card.Text>
-            <Card.Text style={styles.cardText}>Wind Speed</Card.Text>
-          </Card>
-        </Col>
-      </Row>
-      <Row>
-        <Card.Text style={styles.cardTextSm}>
-          Humidity: {humidity}% -- Visibility: {visibilityRange}{" "}
-          miles
-        </Card.Text>
-      </Row>
-    </Container>
-  );
+              <Card.Text style={styles.cardText}>Currently</Card.Text>
+            </Card>
+          </Col>
+          <Col>
+            <Card style={styles.card}>
+              {currCondition.length > 13 ? (
+                <Card.Text style={styles.conditionalText}>
+                  {currCondition}
+                </Card.Text>
+              ) : (
+                <Card.Text style={styles.cardTextLg}>
+                  {currCondition}
+                </Card.Text>
+              )}
+            </Card>
+          </Col>
+          <Col sm="3">
+            <Card style={styles.card}>
+              <Card.Text style={styles.cardTextLg}>
+                {Math.round(currTemp)}&#176;F
+              </Card.Text>
+              <Card.Text style={styles.cardText}>Feels Like</Card.Text>
+            </Card>
+          </Col>
+          <Col sm="3">
+            <Card style={styles.card}>
+              <Card.Text style={styles.cardTextLg}>
+                {Math.round(windSpeed)} mph
+              </Card.Text>
+              <Card.Text style={styles.cardText}>Wind Speed</Card.Text>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Card.Text style={styles.cardTextSm}>
+            Humidity: {humidity}% -- Visibility: {visibilityRange}{" "}
+            miles
+          </Card.Text>
+        </Row>
+      </Container>
+    );
+  }
 };
 
 export default WeatherCard;
@@ -101,7 +104,7 @@ const styles = {
   },
   cardText: {
     textAlign: "center",
-    fontSize: 30,
+    fontSize: 28,
     color: "white",
   },
   cardTextLg: {
@@ -112,7 +115,7 @@ const styles = {
     lineHeight: "1.2",
   },
   cardTextSm: {
-    fontSize: 20,
+    fontSize: 22,
     color: "white",
     textAlign: "center",
     marginBottom: 2
