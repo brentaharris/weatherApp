@@ -12,8 +12,6 @@ const WeatherCard = () => {
   const windSpeed = useSelector((state) => state.weather.windSpeed)
   const humidity = useSelector((state) => state.weather.humidity)
   const visibilityRange = useSelector((state) => state.weather.visibilityRange)
-  // const isLoading = useSelector((state) => state.weather.isLoading)
-  // const errMsg = useSelector((state) => state.weather.errMsg)
 
   return (
     <Container>
