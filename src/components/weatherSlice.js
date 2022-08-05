@@ -3,6 +3,7 @@ import { baseUrl } from "../data/baseUrl";
 import { apiKey } from "../data/apiKey";
 
 
+
 export const fetchWeather = createAsyncThunk(
   'weather/fetchWeather',
   async (zipcode) => {

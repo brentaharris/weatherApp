@@ -1,7 +1,5 @@
 import { Card, Container, Row, Col } from "react-bootstrap";
 import { useSelector } from "react-redux/es/exports";
-import partCloudyIcon from '../assets/weather/64x64/day/116.png'
-
 
 const WeatherCard = () => {
   const city = useSelector((state) => state.weather.city)
